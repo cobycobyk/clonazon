@@ -1,9 +1,9 @@
-import "./Checkout.css";
-import Subtotal from "../Subtotal/Subtotal";
-import CheckoutProduct from "../CheckoutProduct/CheckoutProduct";
+import "./CheckoutPage.css";
+import Subtotal from "../../components/Subtotal/Subtotal";
+import CheckoutProduct from "../../components/CheckoutProduct/CheckoutProduct";
 import { useStateValue } from "../../StateProvider";
 
-export default function Checkout() {
+export default function CheckoutPage() {
   const [{ basket, user }, dispatch] = useStateValue();
 
   return (
