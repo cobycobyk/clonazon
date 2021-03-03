@@ -21,7 +21,6 @@ export default function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log("User is ", authUser);
       if (authUser) {
         //user just logged in or user was logged in
         dispatch({

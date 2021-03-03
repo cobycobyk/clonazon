@@ -6,7 +6,8 @@ import { Link, useHistory } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../reducer";
-import axios from "axios";
+import axios from "../../axios";
+import { db } from "../../firebase";
 
 export default function PaymentPage() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -30,7 +31,6 @@ export default function PaymentPage() {
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
-    console.log(clientSecret);
   }, [basket]);
 
   console.log("THESCRETIS", clientSecret);
@@ -44,6 +44,15 @@ export default function PaymentPage() {
         },
       })
       .then(({ paymentIntent }) => {
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
         setSucceeded(true);
         setError(null);
         setProcessing(false);
@@ -51,7 +60,7 @@ export default function PaymentPage() {
         dispatch({
           type: "EMPTY_BASKET",
         });
-        history.replaceState("/orders");
+        history.replace("/orders");
       });
   };
 
