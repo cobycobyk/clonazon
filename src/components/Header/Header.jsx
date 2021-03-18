@@ -25,7 +25,7 @@ export default function Header() {
       </Link>
       <div className="header__search">
         <input className="header__searchInput" type="text" />
-        <SearchIcon className="header_searchIcon" />
+        <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
         <Link to={!user && "/login"}>

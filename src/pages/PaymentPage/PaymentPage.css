@@ -17,7 +17,6 @@
 .payment__section {
   display: flex;
   padding: 20px;
-  margin: 0 20px;
   border-bottom: 1px solid lightgray;
 }
 
@@ -28,7 +27,8 @@
 .payment__address,
 .payment__items,
 .payment__details {
-  flex: 0.8;
+  flex: 1rem;
+  padding-left: 10px;
 }
 
 .payment__details > form {
